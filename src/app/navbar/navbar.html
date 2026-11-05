@@ -1,1 +1,40 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand font-heading cursor-pointer" (click)="navegarListado()">
+        4V Pizza
+        </a>
+
+        <ul class="navbar-nav me-auto flex-row gap-3">
+        <li class="nav-item">
+            <a class="nav-link font-heading cursor-pointer" 
+            routerLink="/listado" 
+            routerLinkActive="active fw-bold text-white"
+            (click)="navegarListado()">
+            Listado
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-heading cursor-pointer" 
+            routerLink="/pedido" 
+            routerLinkActive="active fw-bold text-white"
+            (click)="navegarPedido()">
+            Pedido
+            @if (totalItems > 0) {
+                <span class="badge bg-danger ms-1">{{ totalItems }}</span>
+            }
+            </a>
+        </li>
+        </ul>
+
+        <div class="d-flex align-items-center">
+        <input 
+            class="form-control form-control-sm" 
+            type="search" 
+            placeholder="Buscar ingrediente..." 
+            aria-label="Buscar ingrediente"
+            [formControl]="busquedaControl"
+            (input)="onBuscar()"
+            (keyup)="onBuscar()">
+        </div>
+    </div>
+</nav>
