@@ -1,12 +1,28 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { Header } from './header/header';
+import { Navbar } from './navbar/navbar';
+import { Footer } from './footer/footer';
+import { Pizza } from './services/pizza';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.scss',
+  imports: [RouterOutlet, Header, Navbar, Footer],
   templateUrl: './app.html',
+  styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('Entregable_Pizzeria4Vientos');
+  title = '4VPizza';
+
+  constructor(
+    private pizzaService: Pizza,
+    private router: Router
+  ) {}
+
+  filtrarPorIngrediente(ingrediente: string) {
+    this.pizzaService.setFiltro(ingrediente);
+    this.router.navigate(['/listado'], {
+      queryParams: { filtro: ingrediente || null }
+    });
+  }
 }
